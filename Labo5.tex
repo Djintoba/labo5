@@ -1,0 +1,200 @@
+\documentclass{article}
+\usepackage[T1]{fontenc}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{siunitx}
+\usepackage{tabularx}
+\usepackage[paperheight=8cm, paperwidth=8cm]{geometry}
+\usepackage{longtable}
+\usepackage{threeparttable}
+\usepackage{ragged2e}
+
+
+\begin{document}
+Laboratory 5\\
+NONOGA Djintoba\\ 
+1032249064\\
+
+\newcolumntype{B}{>{\bfseries}c}
+
+
+
+\section{First table}
+\begin{center}
+\begin{tabular}{lll}
+    Country & Capital & language\\
+    Togo    & Lome    & French\\
+    Russia  & Moscow  & Russian\\
+    Germany & Berlin  & German\\
+\end{tabular}
+\end{center}
+
+
+\section{Differnt Alignment}
+Now let's try different column alignments:
+
+\begin{center}
+\begin{tabular}{lcr}
+\toprule
+Left Aligned & Centered & Right Aligned \\
+\midrule
+dog & meat & medium \\
+horse & hay & large \\
+frog & flies & small \\
+rabbit & carrots & small \\
+elephant & plants & very large \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\section{Too few items in a table row}
+
+what happens when we have too few items in a row:
+
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+Animal & Food & Size \\
+\midrule
+dog & meat \\  
+horse & hay & large \\
+frog \\  
+\bottomrule
+\end{tabular}
+\end{center}
+
+\textbf{Observation:} Empty cells are created for missing items. The table still compiles but may look incomplete.
+
+\section{Too many items in a table row}
+
+What happens when we have too many items:
+
+\textbf{Observation:} LaTeX throws an error: \texttt{Extra alignment tab has been changed to \textbackslash cr}. The compilation fails until the extra items are removed.
+
+\section{Using \texttt{\textbackslash multicolumn} }
+Now let's experiment with column spanning:
+
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+Animal & Food & Size \\
+\midrule
+dog & meat & medium \\
+\multicolumn{2}{c}{Unknown Animal} & large \\  
+horse & \multicolumn{2}{c}{Eats only hay (large)} \\  
+\multicolumn{3}{c}{All animals in this table are mammals} \\  
+frog & flies & small \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\section{Advanced Table features}
+\subsection{Custom column types}
+Using the \texttt{B} column type we defined for bold centered text:
+
+\begin{center}
+\begin{tabular}{B p{2cm}r}
+\toprule
+\multicolumn{1}{c}{Bold Header} & Description & Size \\
+\midrule
+DOG & Loyal companion & medium \\
+CAT & Independent friend & small \\
+FISH & Aquatic creature & tiny \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection{Numeric alignment with siunitx}
+Proper alignment of numeric data:
+\begin{center}
+\begin{tabular}{S[table-format=2.2] S[table-format=3.2]}
+\toprule
+{Weight (kg)} & {Height (cm)} \\
+\midrule
+12.50 & 45.20 \\
+ 8.75 & 35.80 \\
+25.00 & 62.30 \\
+ 3.25 & 18.50 \\
+15.80 & 52.10 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection{Table with notes}
+Using \texttt{threeparttable} for footnotes:
+\begin{center}
+\begin{threeparttable}
+\caption{Animal Characteristics with Notes}
+\begin{tabular}{lll}
+\toprule
+Animal & Diet & Lifespan \\
+\midrule
+Dog & Omnivorous & 10-13 years\tnote{1} \\
+Cat & Carnivorous & 12-15 years \\
+Tortoise & Herbivorous & 80-150 years\tnote{2} \\
+\bottomrule
+\end{tabular}
+\begin{tablenotes}
+\item [1] Varies by breed and size
+\item [2] Some species can live even longer
+\end{tablenotes}
+\end{threeparttable}
+\end{center}
+
+
+\subsection{Column Styling}
+Styling columns with pre- and post-content:
+\begin{center}
+\begin{tabular}{>{\itshape}l<{:} >{\color{blue}}ll}
+\toprule
+\multicolumn{1}{c}{Animal} & Food & Size \\
+\midrule
+dog & meat & medium \\
+cat & fish & small \\
+bird & seeds & tiny \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection{Multi-page Table Example}
+A long table that can span multiple pages:
+\begin{center}
+\begin{longtable}{llS[table-format=2.1]}
+\caption{Extended Animal Data} \\
+\toprule
+Animal & Habitat & {Avg Weight (kg)} \\
+\midrule
+\endfirsthead
+\multicolumn{3}{c}{{\tablename\ \thetable{} -- continued}} \\
+\toprule
+Animal & Habitat & {Avg Weight (kg)} \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+African Elephant & Savanna & 6000.0 \\
+Blue Whale & Ocean & 140000.0 \\
+Giraffe & Savanna & 800.0 \\
+Polar Bear & Arctic & 450.0 \\
+Kangaroo & Outback & 25.0 \\
+Penguin & Antarctica & 5.0 \\
+Tiger & Jungle & 90.0 \\
+Lion & Savanna & 100.0 \\
+Gorilla & Rainforest & 160.0 \\
+Eagle & Mountains & 1.5 \\
+Dolphin & Ocean & 75.0 \\
+Octopus & Ocean & 2.5 \\
+Camel & Desert & 150.0 \\
+Wolf & Forest & 40.0 \\
+Fox & Various & 3.5 \\
+Rabbit & Meadows & 0.5 \\
+Squirrel & Forests & 0.2 \\
+Bat & Caves & 0.02 \\
+Hippopotamus & Rivers & 1500.0 \\
+Rhinoceros & Savanna & 2300.0 \\
+\end{longtable}
+\end{center}
+
+These skills form the foundation for creating professional, readable tables in scientific documents.
+
+\end{document}
